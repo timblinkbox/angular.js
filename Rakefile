@@ -237,7 +237,7 @@ end
 ##
 # generates css snippet from a given files and optionally applies simple minification rules
 #
-def gen_css(cssFile, minify = false)
+def gen_css(cssFile, minify = true)
   css = ''
   File.open(cssFile, 'r') do |f|
     css = f.read
