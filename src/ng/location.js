@@ -514,6 +514,9 @@ function $LocationProvider(){
         initUrlParts = matchUrl(initUrl),
         appBaseUrl;
 
+    // Apply the html5Mode setting to the $browser service
+    $browser.html5HistoryMode(html5Mode);
+
     if (html5Mode) {
       basePath = $browser.baseHref() || '/';
       pathPrefix = pathPrefixFromBase(basePath);
