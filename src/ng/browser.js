@@ -29,7 +29,8 @@ function Browser(window, document, $log, $sniffer) {
       history = window.history,
       setTimeout = window.setTimeout,
       clearTimeout = window.clearTimeout,
-      pendingDeferIds = {};
+      pendingDeferIds = {},
+      useHtml5HistoryMode = false;
 
   self.isMock = false;
 
@@ -151,7 +152,7 @@ function Browser(window, document, $log, $sniffer) {
     if (url) {
       if (lastBrowserUrl == url) return;
       lastBrowserUrl = url;
-      if ($sniffer.history) {
+      if ($sniffer.history && useHtml5HistoryMode) {
         if (replace) history.replaceState(null, '', url);
         else {
           history.pushState(null, '', url);
@@ -212,7 +213,7 @@ function Browser(window, document, $log, $sniffer) {
       // changed by push/replaceState
 
       // html5 history api - popstate event
-      if ($sniffer.history) jqLite(window).bind('popstate', fireUrlChange);
+      if ($sniffer.history && useHtml5HistoryMode) jqLite(window).bind('popstate', fireUrlChange);
       // hashchange event
       if ($sniffer.hashchange) jqLite(window).bind('hashchange', fireUrlChange);
       // polling
@@ -350,6 +351,15 @@ function Browser(window, document, $log, $sniffer) {
       return true;
     }
     return false;
+  };
+
+   self.html5HistoryMode = function(mode) {
+    if (isDefined(mode)) {
+      useHtml5HistoryMode = mode;
+      return this;
+    } else {
+      return useHtml5HistoryMode;
+    }
   };
 
 }
