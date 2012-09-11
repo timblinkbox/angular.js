@@ -150,16 +150,16 @@ angular.scenario.output('html', function(context, runner, model) {
         }
 		
 		// Add the tags if they exist
-+		if(!!defn.tags && defn.tags.length > 0)
-+        {
-+		    var tagsHtml = '';
-+		    var $tags  = context.find('#' + id).find('> .tags');
-+		    forEach(defn.tags, function(tag) {
-+		        tagsHtml += '<li>' + tag + '</li>';    
-+		    });
-+            $tags.html(tagsHtml);
-+            $tags.show();
-+        }
+		if(!!defn.tags && defn.tags.length > 0)
+        {
+		    var tagsHtml = '';
+		    var $tags  = context.find('#' + id).find('> .tags');
+		    forEach(defn.tags, function(tag) {
+		        tagsHtml += '<li>' + tag + '</li>';    
+		    });
+            $tags.html(tagsHtml);
+            $tags.show();
+        }
       }
       currentContext = context.find('#' + id);
     });

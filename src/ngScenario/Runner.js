@@ -86,7 +86,7 @@ angular.scenario.Runner.prototype.describe = function(name, body) {
  * @param {function()} body Body of the block
  * @param {string} description Description of the block
  */
-angular.scenario.Runner.prototype.describeStart = function(name, body, description) {
+angular.scenario.Runner.prototype.describeStart = function(name, body, description, tags) {
   var self = this;
   this.currentDescribe.describe(name, function() {
     var parentDescribe = self.currentDescribe;
@@ -95,7 +95,8 @@ angular.scenario.Runner.prototype.describeStart = function(name, body, descripti
 	self.currentDescribe = this;	
 	body.call(this, endDescribeCallback);    
   }, 
-  description);
+  description,
+  tags);
 };
 
 /**
