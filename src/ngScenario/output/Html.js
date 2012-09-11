@@ -134,6 +134,7 @@ angular.scenario.output('html', function(context, runner, model) {
           '<div class="test-describe" id="' + id + '">' +
           '  <h2></h2>' +
 		  '  <div class="description" style="display: none;"></div>' +
+		  '  <ul class="tags" style="display: none;"></ul>' +
           '  <div class="test-children"></div>' +
           '  <ul class="tests"></ul>' +
           '</div>'
@@ -147,6 +148,18 @@ angular.scenario.output('html', function(context, runner, model) {
             $description.text(defn.description);
             $description.show();
         }
+		
+		// Add the tags if they exist
++		if(!!defn.tags && defn.tags.length > 0)
++        {
++		    var tagsHtml = '';
++		    var $tags  = context.find('#' + id).find('> .tags');
++		    forEach(defn.tags, function(tag) {
++		        tagsHtml += '<li>' + tag + '</li>';    
++		    });
++            $tags.html(tagsHtml);
++            $tags.show();
++        }
       }
       currentContext = context.find('#' + id);
     });
